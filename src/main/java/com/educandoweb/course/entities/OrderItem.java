@@ -14,13 +14,13 @@ import jakarta.persistence.Table;
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
-	
+
 	private Integer quantity;
 	private Double price;
-	
+
 	public OrderItem() {
 	}
 
@@ -35,19 +35,19 @@ public class OrderItem implements Serializable {
 	public Order getOrder() {
 		return id.getOrder();
 	}
-	
+
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
-	
+
 	public Product getProduct() {
 		return id.getProduct();
 	}
-	
+
 	public void setProduct(Product product) {
 		id.setProduct(product);
 	}
-	
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -62,6 +62,10 @@ public class OrderItem implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Double getSubTotal() {
+		return price * quantity;
 	}
 
 	@Override
@@ -80,7 +84,5 @@ public class OrderItem implements Serializable {
 		OrderItem other = (OrderItem) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
 }
